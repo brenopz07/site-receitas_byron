@@ -14,6 +14,19 @@ export default function Home() {
             </Link>
           </div>
         </section>
+
+        {/* secao receitas em destaque*/}
+        <section>
+          <div className='container mx-auto'>
+            <h2>Receitas em destaque</h2>
+
+            {/* cards de receitas*/}  
+
+            <Link href='/receitas'>
+              Ver todas as receitas →
+            </Link>
+          </div>
+        </section>
     </main>
   );
 }
