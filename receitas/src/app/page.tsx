@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import { recipes } from '@/lib/data';
+import RecipeCard from '@/components/RecipeCard';
 
 export default function Home() {
+  const featuredRecipes = recipes.slice(0,3)
   return (
     <main className="flex-grow">
         {/*secao Hero*/}
@@ -17,10 +20,14 @@ export default function Home() {
 
         {/* secao receitas em destaque*/}
         <section className='py-12'>
-          <div className=' flex flex-col items-center container mx-auto'>
+          <div className=' flex flex-col items-center container mx-auto gap-8'>
             <h2 className='text-lg font-bold'>Receitas em destaque</h2>
 
-            {/* cards de receitas*/}  
+            <div className='flex flex-col gap-8'>
+              {featuredRecipes.map((recipe) => (
+                <RecipeCard key={recipe.id} recipe={recipe}/>
+              ))}
+            </div>
 
             <Link className='flex text-blue-500 hover:text-blue-800 transition-colors' href='/receitas'>
               Ver todas as receitas →
