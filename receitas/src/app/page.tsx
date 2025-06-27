@@ -17,7 +17,7 @@ export default function Home() {
 
         {/* secao receitas em destaque*/}
         <section className='py-12'>
-          <div className=' flex flex-col items-center container mx-auto'>
+          <div className=' flex flex-col items-center container mx-auto gap-8'>
             <h2 className='text-lg font-bold'>Receitas em destaque</h2>
 
             {/* cards de receitas*/}  
