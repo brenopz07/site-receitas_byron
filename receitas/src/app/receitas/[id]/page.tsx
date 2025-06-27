@@ -1,4 +1,5 @@
 import InfoPill from "@/components/infoPill";
+import PreparationStep from "@/components/PreparationStep";
 import { recipes } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +21,7 @@ export default function ReceitaPage( {params} : RecipePageProps) {
     return (
         <main className="flex-grow py-8">
             <div className="container mx-auto">
-                <Link className="flex text-blue-500 hover:text-blue-800 mb-6" href='receitas'>
+                <Link className="flex text-blue-500 hover:text-blue-800 mb-6" href='/receitas'>
                 ← Voltar para receitas</Link>
                 <section className="rounded-lg overflow-hidden shado-md">
                     {/*Imagem da capa da receita*/}
@@ -44,7 +45,7 @@ export default function ReceitaPage( {params} : RecipePageProps) {
                         <div className="flex gap-4">
                             <InfoPill title="Preparo" info={recipe.prepTime}/>
                             <InfoPill title="Cozimento" info={recipe.cookTime}/>
-                            <InfoPill title="Porçóes" info={recipe.servings}/>
+                            <InfoPill title="Porções" info={recipe.servings}/>
                             <InfoPill title="Categoria" info={recipe.category}/>
                         </div>
 
@@ -59,15 +60,19 @@ export default function ReceitaPage( {params} : RecipePageProps) {
                                 <h2 className="text-xl font-bold mb-4">Ingredientes</h2>
                                 <ul className="list-disc list-inside space-y-2">
                                     {recipe.ingredients.map((ingredient) =>(
-                                        <li className="marker:text-blue-500">{ingredient}</li>
+                                        <li key={ingredient} className="marker:text-blue-500">{ingredient}</li>
                                     ))}
                                 </ul>
                             </div>
 
                             {/*coluna do modo preparo*/}
                             <div>
-                                <h2 className="text-xl font-bold mb-4">Modo de preparo</h2>
-                                {/*TODO: componente de passo de preparo */}
+                                <h2 className="text-xl font-bold mb-4">Modo de Preparo</h2>
+                                <ol className="space-y-4">
+                                    {recipe.instructions.map((instructions, index) =>(
+                                        <PreparationStep key={instructions} index={index+1} description={instructions}/>
+                                    ))}
+                                </ol>
                             </div>
                         </div>
                     </div>
