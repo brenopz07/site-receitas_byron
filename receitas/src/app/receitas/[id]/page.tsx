@@ -23,7 +23,7 @@ export default function ReceitaPage( {params} : RecipePageProps) {
             <div className="container mx-auto">
                 <Link className="flex text-blue-500 hover:text-blue-800 mb-6" href='/receitas'>
                 ← Voltar para receitas</Link>
-                <section className="rounded-lg overflow-hidden shado-md">
+                <section className="rounded-lg overflow-hidden shadow-md">
                     {/*Imagem da capa da receita*/}
                     <div className="relative h-96 w-full">
                         <Image
@@ -42,7 +42,7 @@ export default function ReceitaPage( {params} : RecipePageProps) {
                         </div>
 
                         {/*Infos de preparo da receita*/}
-                        <div className="flex gap-4">
+                        <div className="lg:flex grid grid-cols-2 gap-4">
                             <InfoPill title="Preparo" info={recipe.prepTime}/>
                             <InfoPill title="Cozimento" info={recipe.cookTime}/>
                             <InfoPill title="Porções" info={recipe.servings}/>
@@ -54,7 +54,7 @@ export default function ReceitaPage( {params} : RecipePageProps) {
                         </div>
 
                         {/*colunas*/}
-                        <div className="grid grid-cols-2">
+                        <div className="lg:grid grid-cols-2">
                             {/*coluna dos ingredientes*/}
                             <div>
                                 <h2 className="text-xl font-bold mb-4">Ingredientes</h2>
@@ -67,7 +67,7 @@ export default function ReceitaPage( {params} : RecipePageProps) {
 
                             {/*coluna do modo preparo*/}
                             <div>
-                                <h2 className="text-xl font-bold mb-4">Modo de Preparo</h2>
+                                <h2 className="text-xl font-bold lg:mb-4 lg:py-0 py-8">Modo de Preparo</h2>
                                 <ol className="space-y-4">
                                     {recipe.instructions.map((instructions, index) =>(
                                         <PreparationStep key={instructions} index={index+1} description={instructions}/>
