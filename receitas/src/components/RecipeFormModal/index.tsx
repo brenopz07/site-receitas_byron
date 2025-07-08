@@ -5,16 +5,18 @@ import {
   RecipeFormData,
   recipeSchema,
 } from "@/lib/formValidationSchemas/recipeSchema";
+import { Recipe } from "@/lib/data";
 interface RecipeFormModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSave: (recipe: Omit<Recipe, "id">) => void;
 }
 
 const DEFAULT_VALUES: RecipeFormData = {
   title: "",
   category: "",
   description: "",
-  imageURL: "",
+  image: "",
   prepTime: "",
   cookTime: "",
   servings: 1,
@@ -25,6 +27,7 @@ const DEFAULT_VALUES: RecipeFormData = {
 export default function RecipeFormModal({
   isOpen,
   onClose,
+  onSave
 }: RecipeFormModalProps) {
 
   const {
@@ -65,7 +68,8 @@ export default function RecipeFormModal({
     }
 
     console.log(recipeData);
-    reset();
+    onSave(recipeData);
+    reset
     onClose();
   };
 
@@ -132,17 +136,17 @@ export default function RecipeFormModal({
 
           {/* URL da imagem */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="imageUrl">URL da imagem</label>
+            <label htmlFor="image">URL da imagem</label>
             <input
               type="text"
               className={inputStyle}
-              id="imageUrl"
+              id="image"
               placeholder="/placeholder.svg"
-              {...register("imageURL")}
+              {...register("image")}
             />
-            {errors.imageURL && (
+            {errors.image && (
               <span className="text-sm text-red-500">
-                {errors.imageURL.message}
+                {errors.image.message}
               </span>
             )}
           </div>
