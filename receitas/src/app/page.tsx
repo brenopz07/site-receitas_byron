@@ -4,6 +4,7 @@ import RecipeCard from '@/components/RecipeCard';
 
 export default function Home() {
   const featuredRecipes = recipes.slice(0,3)
+
   return (
     <main className="flex-grow">
         {/*secao Hero*/}
