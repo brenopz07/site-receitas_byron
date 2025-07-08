@@ -1,3 +1,5 @@
+"use client";
+
 import { useFieldArray, useForm } from "react-hook-form";
 import { Dialog, DialogHeader, DialogTitle, DialogContent } from "../ui/dialog";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +9,7 @@ import {
 } from "@/lib/formValidationSchemas/recipeSchema";
 import { Recipe } from "@/lib/data";
 import { useEffect } from "react";
+
 interface RecipeFormModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -34,7 +37,6 @@ export default function RecipeFormModal({
   mode,
   recipe,
 }: RecipeFormModalProps) {
-
   const {
     register,
     reset,
@@ -79,7 +81,6 @@ export default function RecipeFormModal({
     }
   }, [mode, isOpen, recipe, reset]);
 
-
   const onSubmit = (data: RecipeFormData) => {
     const recipeData = {
       ...data,
@@ -91,20 +92,21 @@ export default function RecipeFormModal({
     onSave(
       mode === "edit" && recipe ? { ...recipeData, id: recipe.id } : recipeData
     );
-    reset
+    reset();
     onClose();
   };
 
-    const inputStyle = "p-2 border border-zinc-200 rounded-md flex-grow w-full"
+  const inputStyle = "p-2 border border-zinc-200 rounded-md flex-grow w-full";
 
-    return (
+  return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent  className="bg-white min-w-2xl max-h-[90dvh] overflow-y-scroll">
+      <DialogContent className="bg-white min-w-2xl max-h-[90dvh] overflow-y-scroll">
         <DialogHeader>
           <DialogTitle>
             {mode === "create" ? "Nova receita" : "Editar receita"}
           </DialogTitle>
         </DialogHeader>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-4 w-full"
@@ -243,7 +245,11 @@ export default function RecipeFormModal({
                       placeholder="Digite um ingrediente"
                       {...register(`ingredients.${index}.value`)}
                     />
-                    {errors.ingredients?.[index]?.value && <span className="text-sm text-red-500">{errors.ingredients?.[index].value.message}</span>}
+                    {errors.ingredients?.[index]?.value && (
+                      <span className="text-sm text-red-500">
+                        {errors.ingredients?.[index].value.message}
+                      </span>
+                    )}
                   </div>
                   {ingredientFields.length > 1 && (
                     <button
@@ -258,16 +264,16 @@ export default function RecipeFormModal({
               ))}
 
               <button
-                onClick={() => appendIngredients({ value: "" })}
                 type="button"
                 className="bg-white border border-zinc-300 rounded-md hover:bg-gray-100 transition-colors px-4 py-2 font-medium w-fit"
+                onClick={() => appendIngredients({ value: "" })}
               >
                 Adicionar ingrediente
               </button>
             </div>
           </div>
 
-          {/* Lista de instrucoes */}
+          {/* Lista de instruções */}
           <div className="flex flex-col gap-1">
             <label htmlFor="instructions">Instruções</label>
             <div className="flex flex-col gap-1">
@@ -322,7 +328,6 @@ export default function RecipeFormModal({
               type="submit"
               className="bg-black rounded-md text-white hover:bg-gray-800 transition-colors px-4 py-2 font-medium"
             >
-              Criar receita
               {mode === "create" ? "Criar receita" : "Salvar alterações"}
             </button>
           </div>
@@ -330,4 +335,4 @@ export default function RecipeFormModal({
       </DialogContent>
     </Dialog>
   );
-};
+}
