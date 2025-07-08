@@ -6,11 +6,13 @@ import React from "react";
 
 interface RecipeCardProps{
     recipe: Recipe;
+    onEdit: () => void
 }
 
-export default function RecipeCard({ recipe }: RecipeCardProps){
+export default function RecipeCard({ recipe, onEdit }: RecipeCardProps) {
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    onEdit();
   }
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,20 +34,20 @@ export default function RecipeCard({ recipe }: RecipeCardProps){
 
                     {/* Categoria e ações */}
                     <div className="flex items-center justify-between w-full">
-                        <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                        {recipe.category}
-                        </span>
+                            <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                            {recipe.category}
+                            </span>
 
                         <div className="flex gap-2">
-                        {/* botão de editar */}
-                        <button type="button" onClick={(e) => handleEdit(e)} className="p-2 border border-gray-200 rounded hover:bg-gray-200 transition-colors cursor-pointer">
-                            <Edit size={16}/>
-                        </button>
+                            {/* botão de editar */}
+                            <button type="button" onClick={(e) => handleEdit(e)} className="p-2 border border-gray-200 rounded hover:bg-gray-200 transition-colors cursor-pointer">
+                                <Edit size={16}/>
+                            </button>
 
-                        {/* botão de remover */}
-                        <button type="button" onClick={(e) => handleDelete(e)} className="p-2 border border-gray-200 rounded hover:bg-gray-200 transition-colors cursor-pointer">
-                            <Trash2 size={16}/>
-                        </button>
+                            {/* botão de remover */}
+                            <button type="button" onClick={(e) => handleDelete(e)} className="p-2 border border-gray-200 rounded hover:bg-gray-200 transition-colors cursor-pointer">
+                                <Trash2 size={16}/>
+                            </button>
                         </div>
                     </div>
                 </div>
