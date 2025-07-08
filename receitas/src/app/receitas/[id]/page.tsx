@@ -22,7 +22,7 @@ export default function ReceitaPage({ params }: RecipePageProps) {
   return (
     <main className="flex-grow py-8">
       <div className="container mx-auto">
-        <Link className="flex text-orange-500 hover:text-orange-700 mb-6" href="/receitas">
+        <Link className="flex text-blue-500 hover:text-blue-800 mb-6" href="/receitas">
           <ChevronLeft />
           Voltar para receitas
         </Link>
@@ -47,7 +47,7 @@ export default function ReceitaPage({ params }: RecipePageProps) {
             </div>
 
             {/* Infos de preparo */}
-            <div className="flex gap-4">
+            <div className="lg:flex grid grid-cols-2 gap-4">
               <InfoPill title="Preparo" info={recipe.prepTime} />
               <InfoPill title="Cozimento" info={recipe.cookTime} />
               <InfoPill title="Porções" info={recipe.servings} />
@@ -55,20 +55,20 @@ export default function ReceitaPage({ params }: RecipePageProps) {
             </div>
 
             {/* colunas */}
-            <div className="grid grid-cols-2">
+            <div className="lg:grid grid-cols-2">
               {/* coluna dos ingredientes */}
               <div>
                 <h2 className="text-xl font-bold mb-4">Ingredientes</h2>
                 <ul className="list-disc list-inside space-y-2">
                   {recipe.ingredients.map((ingredient) => (
-                    <li key={ingredient} className="marker:text-orange-500">{ingredient}</li>
+                    <li key={ingredient} className="marker:text-blue-500">{ingredient}</li>
                   ))}
                 </ul>
               </div>
 
               {/* coluna do modo de preparo */}
               <div>
-                <h2 className="text-xl font-bold mb-4">Modo de Preparo</h2>
+                <h2 className="text-xl font-bold lg:mb-4 lg:py-0 py-8">Modo de Preparo</h2>
                 <ol className="space-y-4">
                   {recipe.instructions.map((instruction, index) => (
                     <PreparationStep key={instruction} index={index + 1} description={instruction} />

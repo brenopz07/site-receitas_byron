@@ -32,7 +32,7 @@ export default function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps
                 <div className="flex flex-col p-4 gap-6">
                     {/* Titulo e descrição */}
                     <div className="space-y-2">
-                        <h3 className="text-lg font-bold hover:text-orange-500 transition-colors">{recipe.title}</h3>
+                        <h3 className="text-lg font-bold hover:text-blue-500 transition-colors">{recipe.title}</h3>
                         <p>{recipe.description}</p>
                     </div>
 
