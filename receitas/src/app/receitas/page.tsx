@@ -68,7 +68,9 @@ export default function ReceitasPage() {
       );
     }
     handleCloseModal();
-    } catch(error) {}
+    } catch(error) {
+      console.error(`Erro ao ${modalMode === 'create' ? 'criar' : 'editar'} a receita`, error)
+    }
   };
 
   const handleOpenDeleteConfirmationModal = (recipe: Recipe) => {
