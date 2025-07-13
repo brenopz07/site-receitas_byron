@@ -100,7 +100,7 @@ export default function RecipeFormModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white min-w-2xl max-h-[90dvh] overflow-y-scroll">
+      <DialogContent className="bg-white lg:min-w-2xl max-h-[90dvh] overflow-y-scroll">
         <DialogHeader>
           <DialogTitle>
             {mode === "create" ? "Nova receita" : "Editar receita"}
