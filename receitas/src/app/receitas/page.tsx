@@ -78,14 +78,19 @@ export default function ReceitasPage() {
     setIsDeleteConfirmationModalOpen(true);
   };
 
-  const handleDeleteRecipe = () => {
-    if (selectedRecipe) {
-      setRecipes((prev) =>
-        prev.filter((recipe) => recipe.id !== selectedRecipe.id)
-      );
+  const handleDeleteRecipe = async () => {
+    try {
+      if (selectedRecipe) {
+        await api.delete(`/recipes/${selectedRecipe.id}`)
+        setRecipes((prev) =>
+          prev.filter((recipe) => recipe.id !== selectedRecipe.id)
+        );
 
-      setIsDeleteConfirmationModalOpen(false);
-      setSelectedRecipe(undefined);
+        setIsDeleteConfirmationModalOpen(false);
+        setSelectedRecipe(undefined);
+      }
+    } catch (error) {
+      console.error('Erro ao deletar receita', error)
     }
   };
 
