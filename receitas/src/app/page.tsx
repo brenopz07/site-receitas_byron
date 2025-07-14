@@ -6,6 +6,8 @@ import RecipeCard from "@/components/RecipeCard";
 import { useEffect, useState } from "react";
 import { Recipe } from "@/lib/data";
 import api from "@/lib/api";
+import { toast } from "sonner";
+
 
 export default function Home() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -18,6 +20,7 @@ export default function Home() {
         setRecipes(response.data.slice(0, 3));
       } catch (error) {
         console.error("Erro ao requisitar as receitas", error);
+        toast.error("Erro ao requisitar as receitas")
       }
     };
 
@@ -43,7 +46,7 @@ export default function Home() {
           <div className=' flex flex-col items-center container mx-auto gap-8'>
             <h2 className='text-lg font-bold'>Receitas em destaque</h2>
 
-            <div className='lg:flex lg:w-full gap-8 '>
+            <div className='lg:grid grid-cols-3 lg:w-full gap-8 '>
               {recipes.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe}/>
               ))}

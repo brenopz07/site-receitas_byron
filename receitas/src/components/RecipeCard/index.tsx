@@ -24,12 +24,12 @@ export default function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps
   }
     return (
         <Link href={`/receitas/${recipe.id}`}>
-            <div className="border border-slate-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div className=" flex flex-col border border-slate-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full">
                 <div className="relative h-48 w-full">
                     <Image src={recipe.image} fill alt={recipe.title} className="object-cover"/>
                 </div>
 
-                <div className="flex flex-col p-4 gap-6">
+                <div className="flex flex-col p-4 gap-6 justify-between flex-grow">
                     {/* Titulo e descrição */}
                     <div className="space-y-2">
                         <h3 className="text-lg font-bold hover:text-blue-500 transition-colors">{recipe.title}</h3>
