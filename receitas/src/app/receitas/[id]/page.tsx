@@ -22,6 +22,7 @@ export default function ReceitaPage({ params }: RecipePageProps) {
 
   useEffect(() => {
     const fetchRecipe = async () => {
+      setLoading(true)
       try {
         const response = await api.get(`/recipes/${params.id}`);
 
@@ -35,6 +36,18 @@ export default function ReceitaPage({ params }: RecipePageProps) {
 
     fetchRecipe();
   }, []);
+
+  if(loading){
+    return(
+    <main className="flex-grow py-8">
+      <div className="container mx-auto">
+        <div className="flex justify-center">
+          <p>Carregando receita...</p>
+        </div>
+      </div>
+    </main>
+    )
+  }
 
   if (!recipe) {
     return notFound()
