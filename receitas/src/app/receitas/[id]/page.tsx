@@ -1,10 +1,14 @@
+"use client";
+
 import InfoPill from "@/components/infoPill";
 import PreparationStep from "@/components/PreparationStep";
-import { recipes } from "@/lib/data";
+import api from "@/lib/api";
+import { Recipe } from "@/lib/data";
 import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { use, useEffect, useState } from "react";
 
 interface RecipePageProps {
   params: {
@@ -13,7 +17,37 @@ interface RecipePageProps {
 }
 
 export default function ReceitaPage({ params }: RecipePageProps) {
-  const recipe = recipes.find((recipe) => recipe.id === params.id)
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      setLoading(true)
+      try {
+        const response = await api.get(`/recipes/${params.id}`);
+
+        setRecipe(response.data);
+      } catch (error) {
+        console.error("Erro ao requisitar receita", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecipe();
+  }, []);
+
+  if(loading){
+    return(
+    <main className="flex-grow py-8">
+      <div className="container mx-auto">
+        <div className="flex justify-center">
+          <p>Carregando receita...</p>
+        </div>
+      </div>
+    </main>
+    )
+  }
 
   if (!recipe) {
     return notFound()
@@ -61,7 +95,7 @@ export default function ReceitaPage({ params }: RecipePageProps) {
                 <h2 className="text-xl font-bold mb-4">Ingredientes</h2>
                 <ul className="list-disc list-inside space-y-2">
                   {recipe.ingredients.map((ingredient) => (
-                    <li key={ingredient} className="marker:text-blue-500">{ingredient}</li>
+                    <li key={ingredient.value} className="marker:text-blue-500">{ingredient.value}</li>
                   ))}
                 </ul>
               </div>
@@ -71,7 +105,7 @@ export default function ReceitaPage({ params }: RecipePageProps) {
                 <h2 className="text-xl font-bold lg:mb-4 lg:py-0 py-8">Modo de Preparo</h2>
                 <ol className="space-y-4">
                   {recipe.instructions.map((instruction, index) => (
-                    <PreparationStep key={instruction} index={index + 1} description={instruction} />
+                    <PreparationStep key={instruction.value} index={index + 1} description={instruction.value} />
                   ))}
                 </ol>
               </div>
